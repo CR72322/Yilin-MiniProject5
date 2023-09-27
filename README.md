@@ -1,4 +1,4 @@
-## SQLite Lab
+## SQLite Lab (Mini Project5 adapted by Yilin)
 
 ### Lab:
 
