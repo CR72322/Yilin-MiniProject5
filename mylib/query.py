@@ -74,6 +74,24 @@ def query3():
     conn.close()
     return "Insert Success"
 
+def query4():
+    '''DELETE the row containing arabica coffee in the GroceryDB table'''
+    conn = sqlite3.connect("GroceryDB.db")
+    cursor = conn.cursor()
+
+    # Define the item_name to delete
+    item_name = "arabica coffee"
+
+    # Execute DELETE command
+    cursor.execute("DELETE FROM GroceryDB WHERE general_name = ?", (item_name,))
+    conn.commit()
+
+    # Print the updated rows
+    print("Deleted rows containing arabica coffee:")
+    query1()
+
+    conn.close()
+    return "Delete Success"
 
 
 
