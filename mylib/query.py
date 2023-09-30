@@ -40,4 +40,41 @@ def query2():
     # Print the updated row
     print("Updated row:")
     query1()
-    return "Success"
+    return "Update Success"
+
+def query3():
+    '''INSERT a new row into the GroceryDB table'''
+    conn = sqlite3.connect("GroceryDB.db")
+    cursor = conn.cursor()
+
+    # Define the values for the new row
+    values = ('new_general_name', 10, 0.1, 0.2, 3.0, 10.0, 'new_tree_name', 'new_tree_node')
+
+    cursor.execute("""
+        INSERT INTO GroceryDB (general_name, count_products, ingred_FPro, 
+        avg_FPro_products, avg_distance_root, ingred_normalization_term, 
+        semantic_tree_name, semantic_tree_node) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, values) 
+    
+    conn.commit()
+    
+    # Retrieve and print the inserted row based on a unique field, e.g., general_name
+    cursor.execute("SELECT * FROM GroceryDB WHERE general_name = ?", (values[0],))
+    row = cursor.fetchone()
+    
+    if row:
+        column_names = [description[0] for description in cursor.description]
+        table = PrettyTable(column_names)  # Initializing table with column names
+        table.add_row(row)
+        print("Inserted new row:")
+        print(table)
+    else:
+        print("Inserted row could not be retrieved")
+        
+    conn.close()
+    return "Insert Success"
+
+
+
+
+
