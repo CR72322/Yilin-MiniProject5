@@ -1,3 +1,4 @@
+![Test Python Versions](https://github.com/nogibjj/IDS706-MiniProject5-Sqlite/actions/workflows/cicd.yml/badge.svg)
 # IDS706 Mini Project5: GroceryDB CRUD Application
 
 ## Project Description
