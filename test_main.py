@@ -1,29 +1,36 @@
 import unittest
-from unittest.mock import patch, call
-from mylib.extract import extract
-from mylib.transform_load import load
+import sqlite3
 from mylib.query import query1, query2, query3, query4
 
-class TestMainMethods(unittest.TestCase):
+class TestMain(unittest.TestCase):
 
-    @patch('mylib.extract.extract')
-    @patch('mylib.transform_load.load')
-    @patch('mylib.query.query1')
-    @patch('mylib.query.query2')
-    @patch('mylib.query.query3')
-    @patch('mylib.query.query4')
-    def test_main_flow(self, mock_query4, mock_query3, mock_query2, mock_query1, mock_load, mock_extract):
-        # Importing the main script and running the main flow
-        import main
+    def setUp(self):
+        # Setting up a test database
+        self.conn = sqlite3.connect("GroceryDB_test.db")
+        # Assuming you have a table creation query, you would execute it here
+        # e.g. self.conn.execute(CREATE TABLE ...)
+        self.conn.close()
 
-        # Checking if methods are called in the correct order
-        mock_extract.assert_called_once()
-        mock_load.assert_called_once()
-        mock_query1.assert_called_once()
-        mock_query2.assert_called_once()
-        mock_query3.assert_called_once()
-        mock_query4.assert_called_once()
+    def tearDown(self):
+        # Cleaning up the test database after tests
+        self.conn = sqlite3.connect("GroceryDB_test.db")
+        self.conn.close()
 
+    def test_query1(self):
+        result = query1()
+        self.assertEqual(result, "Success", "Failed to fetch the top 5 rows")
 
-if __name__ == '__main__':
+    def test_query2(self):
+        result = query2()
+        self.assertEqual(result, "Update Success", "Failed to update the count_products of arabica coffee")
+
+    def test_query3(self):
+        result = query3()
+        self.assertEqual(result, "Insert Success", "Failed to insert a new row")
+
+    def test_query4(self):
+        result = query4()
+        self.assertEqual(result, "Delete Success", "Failed to delete the row containing arabica coffee")
+
+if __name__ == "__main__":
     unittest.main()
