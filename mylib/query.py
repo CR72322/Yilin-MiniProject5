@@ -8,7 +8,8 @@ def query1():
     """Query the database for the top 5 rows of the GroceryDB table"""
     conn = sqlite3.connect("GroceryDB.db")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM GroceryDB LIMIT 5 OFFSET 1") # Skipping the first row (header)
+    # Skipping the first row (header)
+    cursor.execute("SELECT * FROM GroceryDB LIMIT 5 OFFSET 1") 
     
     # Fetching column names
     column_names = [description[0] for description in cursor.description]
@@ -34,7 +35,8 @@ def query2():
     new_count_products = 100
     item_name = "arabica coffee"
 
-    cursor.execute("UPDATE GroceryDB SET count_products = ? WHERE general_name = ?", (new_count_products, item_name))
+    cursor.execute("UPDATE GroceryDB SET count_products = ? WHERE general_name = ?",
+                    (new_count_products, item_name))
     conn.commit()
     conn.close()
     # Print the updated row
@@ -48,7 +50,8 @@ def query3():
     cursor = conn.cursor()
 
     # Define the values for the new row
-    values = ('new_general_name', 10, 0.1, 0.2, 3.0, 10.0, 'new_tree_name', 'new_tree_node')
+    values = ('new_general_name', 10, 0.1, 0.2, 3.0, 10.0,
+               'new_tree_name', 'new_tree_node')
 
     cursor.execute("""
         INSERT INTO GroceryDB (general_name, count_products, ingred_FPro, 

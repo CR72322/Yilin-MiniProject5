@@ -22,7 +22,8 @@ class TestMain(unittest.TestCase):
 
     def test_query2(self):
         result = query2()
-        self.assertEqual(result, "Update Success", "Failed to update the count_products of arabica coffee")
+        self.assertEqual(result, "Update Success",
+                          "Failed to update the count_products of arabica coffee")
 
     def test_query3(self):
         result = query3()
@@ -30,7 +31,8 @@ class TestMain(unittest.TestCase):
 
     def test_query4(self):
         result = query4()
-        self.assertEqual(result, "Delete Success", "Failed to delete the row containing arabica coffee")
+        self.assertEqual(result, "Delete Success",
+                          "Failed to delete the row containing arabica coffee")
 
 if __name__ == "__main__":
     unittest.main()
