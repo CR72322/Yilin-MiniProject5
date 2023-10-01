@@ -112,3 +112,8 @@ def query4():
 ```bash
 python3 main.py
 ```
+
+## Test
+```bash
+python -m unittest test_main.py
+```
