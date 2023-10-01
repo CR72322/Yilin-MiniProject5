@@ -23,7 +23,7 @@ def query1():
     return "Success"
 ```
 ### Result
-! [Query 1 Result](Results/q1.png "Query 1 Result")
+![Query 1 Result](Results/q1.png "Query 1 Result")
 ### Query 2 - Update Operation
 - This query performs update operation on the `GroceryDB` database. It updates the `count_products` column of the `GroceryDB` table for the row with `general_name` as `arabica coffee`.
 ```python
@@ -44,6 +44,8 @@ def query2():
     query1()
     return "Update Success"
 ```
+### Result
+![Query 2 Result](Results/q2.png "Query 2 Result")
 ### Query 3 - Insert Operation
 - This query performs insert operation on the `GroceryDB` database. It inserts a new row into the `GroceryDB` table.
 ```python
@@ -79,5 +81,34 @@ def query3():
     conn.close()
     return "Insert Success"
 ```
+### Result
+![Query 3 Result](Results/q3.png "Query 3 Result")
 ### Query 4 - Delete Operation
+- This query performs delete operation on the `GroceryDB` database. It deletes the row from the `GroceryDB` table with `general_name` as `arabica coffee`.
+```python
+def query4():
+    '''DELETE the row containing arabica coffee in the GroceryDB table'''
+    conn = sqlite3.connect("GroceryDB.db")
+    cursor = conn.cursor()
 
+    # Define the item_name to delete
+    item_name = "arabica coffee"
+
+    # Execute DELETE command
+    cursor.execute("DELETE FROM GroceryDB WHERE general_name = ?", (item_name,))
+    conn.commit()
+
+    # Print the updated rows
+    print("Deleted rows containing arabica coffee:")
+    query1()
+
+    conn.close()
+    return "Delete Success"
+```
+### Result
+![Query 4 Result](Results/q4.png "Query 4 Result")
+
+## How to Run
+```bash
+python3 main.py
+```
